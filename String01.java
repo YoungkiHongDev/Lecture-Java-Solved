@@ -1,8 +1,8 @@
+import java.util.Scanner;
+
 /*
  * 1. 문자 찾기
  */
-import java.util.Scanner;
-
 public class String01 {
     public static void main(String[] args) {
         //문자열, 문자 입력받기
