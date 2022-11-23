@@ -1,8 +1,8 @@
+import java.util.Scanner;
+
 /*
  * 2. 대소문자 변환
  */
-import java.util.Scanner;
-
 public class String02 {
     public static void main(String[] args) {
         //문자열 입력받기
