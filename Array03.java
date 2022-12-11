@@ -25,5 +25,7 @@ public class Array03 {
                 System.out.println("D");
             }
         }
+
+        sc.close();
     }
 }

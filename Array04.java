@@ -27,5 +27,7 @@ public class Array04 {
         for (int i=0; i<end; i++) {
             System.out.print(arr[i] + " ");
         }
+
+        sc.close();
     }
 }
