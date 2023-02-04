@@ -1,0 +1,41 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        char[] s = st.nextToken().toCharArray();
+        char t = st.nextToken().charAt(0);
+
+        int size = s.length;
+        int[] nums = new int[size];
+
+        int chk = 0;
+        for (int i=0; i<size; i++) {
+            if (s[i] == t) {
+                chk = 0;
+                nums[i] = chk;
+            } else {
+                chk++;
+                nums[i] = chk;
+            }
+        }
+
+        for (int i=size-1; i>=0; i--) {
+            if (s[i] == t) {
+                chk = 0;
+            } else {
+                chk++;
+                if (nums[i] > chk) nums[i] = chk;
+                if (i==0) nums[i] = chk;
+            }
+        }
+
+        String result = Arrays.toString(nums).replaceAll("[^0-9\\s]", "");
+        System.out.println(result);
+    }
+}
