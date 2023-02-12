@@ -1,0 +1,20 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        String[] userA = br.readLine().split(" ");
+        String[] userB = br.readLine().split(" ");
+
+        for (int i=0; i<n; i++) {
+            int a = Integer.parseInt(userA[i]);
+            int b = Integer.parseInt(userB[i]);
+            if (a+1 == b || a-2 == b) System.out.println("B");
+            else if (a == b) System.out.println("D");
+            else System.out.println("A");
+        }
+    }
+}
