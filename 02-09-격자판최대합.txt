@@ -1,0 +1,45 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[][] arr = new int[n][n];
+
+        int hori = 0;
+        int vert = 0;
+        int diag1 = 0;
+        int diag2 = 0;
+
+        for (int i=0; i<n; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<n; j++) {
+                arr[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+        
+        int cnt = n;
+        for (int x=0; x<n; x++) {
+            int hMax = 0;
+            int vMax = 0;
+
+            for (int y=0; y<n; y++) {
+                hMax += arr[x][y];
+                vMax += arr[y][x];
+                if (x == y) diag1 += arr[x][y];
+            }
+
+            cnt--;
+            diag2 += arr[x][cnt];
+
+            hori = hori > hMax ? hori : hMax;
+            vert = vert > vMax ? vert : vMax;
+        }
+
+        int result = Math.max(Math.max(hori, vert), Math.max(diag1, diag2));
+        System.out.println(result);
+    }
+}
