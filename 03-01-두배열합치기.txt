@@ -1,0 +1,54 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int la = Integer.parseInt(br.readLine());
+        int[] a = new int[la];
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<la; i++) {
+            a[i] = Integer.parseInt(st.nextToken());
+        }
+
+        int lb = Integer.parseInt(br.readLine());
+        int[] b = new int[lb];
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<lb; i++) {
+            b[i] = Integer.parseInt(st.nextToken());
+        }
+
+        ArrayList<Integer> result = new ArrayList<>();
+
+        int pa = 0, pb = 0;
+        while(pa < la && pb < lb) {
+            if (a[pa] < b[pb]) {
+                result.add(a[pa]);
+                pa++;
+            } else {
+                result.add(b[pb]);
+                pb++;
+            }
+        }
+
+        if (pa < la) {
+            while(pa < la) {
+                result.add(a[pa]);
+                pa++;
+            }
+        } else if (pb < lb) {
+            while(pb < lb) {
+                result.add(b[pb]);
+                pb++;
+            }
+        }
+
+        String ans = result.toString();
+        ans = ans.replaceAll("[^0-9\\s]", "");
+        System.out.println(ans);
+    }
+}
