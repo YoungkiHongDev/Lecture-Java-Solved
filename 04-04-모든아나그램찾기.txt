@@ -1,0 +1,35 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+
+public class Main {
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        char[] arrS = br.readLine().toCharArray();
+        char[] arrT = br.readLine().toCharArray();
+        HashMap<Character, Integer> map = new HashMap<>();
+        HashMap<Character, Integer> ana = new HashMap<>();
+
+        for (int i=0; i<arrT.length; i++) {
+            map.put(arrS[i], map.getOrDefault(arrS[i], 0)+1);
+            ana.put(arrT[i], ana.getOrDefault(arrT[i], 0)+1);
+        }
+
+        int p=0, result=0;
+        if (map.equals(ana)) result++;
+
+        for (int j=arrT.length; j<arrS.length; j++) {
+            map.put(arrS[j], map.getOrDefault(arrS[j], 0)+1);
+            map.put(arrS[p], map.get(arrS[p])-1);
+
+            if (map.get(arrS[p]) == 0) map.remove(arrS[p]);
+
+            if (map.equals(ana)) result++;
+
+            p++;
+        }
+
+        System.out.println(result);
+    }    
+}
