@@ -1,0 +1,39 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+
+public class Main {
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] s = br.readLine().split(" ");
+        String[] str = br.readLine().split(" ");
+        
+        int n = Integer.parseInt(s[0]);
+        int k = Integer.parseInt(s[1]);
+        int[] nums = new int[n];
+
+        HashMap<Integer, Integer> has = new HashMap<>();
+
+        for (int i=0; i<n; i++) {
+            nums[i] = Integer.parseInt(str[i]);
+        }
+
+        for (int i=0; i<k; i++) {
+            has.put(nums[i], has.getOrDefault(nums[i], 0)+1);
+        }
+
+        String result = "" + has.size();
+        int p = 0;
+        
+        for (int i=k; i<n; i++) {
+            has.put(nums[p], has.get(nums[p])-1);
+            if(has.get(nums[p]) == 0) has.remove(nums[p]);
+            p++;
+            has.put(nums[i], has.getOrDefault(nums[i], 0)+1);
+            result += " " + has.size();
+        }
+
+        System.out.println(result);
+    }
+}
