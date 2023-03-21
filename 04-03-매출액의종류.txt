@@ -2,36 +2,37 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] s = br.readLine().split(" ");
-        String[] str = br.readLine().split(" ");
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         
         int n = Integer.parseInt(s[0]);
         int k = Integer.parseInt(s[1]);
-        int[] nums = new int[n];
-
         HashMap<Integer, Integer> has = new HashMap<>();
+        int[] record = new int[n];
 
-        for (int i=0; i<n; i++) {
-            nums[i] = Integer.parseInt(str[i]);
+        for (int i=0; i<k-1; i++) {
+            record[i] = Integer.parseInt(st.nextToken());
+            has.put(record[i], has.getOrDefault(record[i], 0)+1);
         }
 
-        for (int i=0; i<k; i++) {
-            has.put(nums[i], has.getOrDefault(nums[i], 0)+1);
-        }
-
-        String result = "" + has.size();
+        String result = "";
         int p = 0;
         
-        for (int i=k; i<n; i++) {
-            has.put(nums[p], has.get(nums[p])-1);
-            if(has.get(nums[p]) == 0) has.remove(nums[p]);
+        for (int i=k-1; i<n; i++) {
+            record[i] = Integer.parseInt(st.nextToken());
+            has.put(record[i], has.getOrDefault(record[i], 0)+1);
+            
+            result += has.size() + " ";
+            
+            int pos = record[p];
+            has.put(pos, has.get(pos)-1);
+            if(has.get(pos) == 0) has.remove(pos);
             p++;
-            has.put(nums[i], has.getOrDefault(nums[i], 0)+1);
-            result += " " + has.size();
         }
 
         System.out.println(result);
