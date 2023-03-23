@@ -4,30 +4,21 @@ import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String str = br.readLine();
-        Stack<Character> stack = new Stack<>();
 
-        for (char x : str.toCharArray()) {
-            if (x != ')') {
-                stack.push(x);
-            } else {
-                while(!stack.isEmpty()) {
-                    if (stack.peek() == '(') {
-                        stack.pop();
-                        break;
-                    } else {
-                        stack.pop();
-                    }
-                }
+    public static void main(String[] args) throws IOException {
+        Stack<Character> st = new Stack<>();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String inp = br.readLine();
+    
+        for (char c : inp.toCharArray()) {
+            if (c != ')') st.push(c);
+            else {
+                while (st.peek() != '(') st.pop();
+                st.pop();
             }
         }
 
-        String answer = "";
-        for(char y : stack) {
-            answer = answer + y;
-        }
-        System.out.println(answer);
+        String result = st.toString().replaceAll("[^a-zA-Z]", "");
+        System.out.println(result);
     }
 }
