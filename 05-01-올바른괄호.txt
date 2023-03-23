@@ -4,25 +4,19 @@ import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class Main {
+
     public static void main(String[] args) throws IOException {
+        Stack<Character> st = new Stack<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String str = br.readLine();
-        String answer = "YES";
-
-        Stack<Character> stack = new Stack<>();
-        for (char c : str.toCharArray()) {
-            if (c == '(') stack.push(c);
-            else if (c == ')' && stack.isEmpty()) {
-                answer = "NO";
-                break;
-            } else if (c == ')' && !stack.isEmpty()) {
-                stack.pop();
-            }
-        }
-        if (!stack.isEmpty()) {
-            answer = "NO";
+        String inp = br.readLine();
+        String result = "YES";
+    
+        for (char c : inp.toCharArray()) {
+            if (c == '(') st.push(c);
+            else if (!st.isEmpty()) st.pop();
+            else result = "NO";
         }
 
-        System.out.println(answer);
+        System.out.println(result);
     }
 }
