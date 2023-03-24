@@ -1,0 +1,57 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Stack;
+import java.util.StringTokenizer;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[][] doll = new int[n][n];
+        Stack<Integer> basket = new Stack<>();
+
+        for (int i=0; i<n; i++) {
+            StringTokenizer st_doll = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<n; j++) {
+                doll[i][j] = Integer.parseInt(st_doll.nextToken());
+            }
+        }
+
+        int m = Integer.parseInt(br.readLine());
+        int[] move = new int[m];
+        StringTokenizer st_move = new StringTokenizer(br.readLine(), " ");
+        for (int k=0; k<m; k++) {
+            move[k] = Integer.parseInt(st_move.nextToken());
+        }
+
+        int result = 0;
+        for (int x=0; x<m; x++) {
+            int position = move[x] - 1;
+            for (int y=0; y<n; y++) {
+                int target = doll[y][position];
+                if (target != 0) {
+                    if (basket.isEmpty()) {
+                        basket.push(target);
+                        doll[y][position] = 0;
+                        break;
+                    } else {
+                        if (basket.peek() == target) {
+                            basket.pop();
+                            doll[y][position] = 0;
+                            result += 2;
+                            break;
+                        } else {
+                            basket.push(target);
+                            doll[y][position] = 0;
+                            break;
+                        }
+                    }
+                } 
+            }
+        }
+
+        System.out.println(result);
+    }
+}
