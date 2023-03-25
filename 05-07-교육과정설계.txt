@@ -1,0 +1,29 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Queue<Character> que = new LinkedList<>();
+        String ess = br.readLine();
+        String sub = br.readLine();
+        String result = "NO";
+
+        for (int i=0; i<ess.length(); i++) {
+            que.offer(ess.charAt(i));
+        }
+
+        for (char c : sub.toCharArray()) {
+            if (c == que.peek()) que.poll();
+            if (que.isEmpty()) {
+                result = "YES";
+                break;
+            }
+        }
+
+        System.out.println(result);
+    }
+}
