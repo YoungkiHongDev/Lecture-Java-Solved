@@ -1,0 +1,45 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Queue<Integer> que = new LinkedList<>();
+        String[] nm = br.readLine().split(" ");
+        String[] inputs = br.readLine().split(" ");
+        int n = Integer.parseInt(nm[0]);
+        int m = Integer.parseInt(nm[1]);
+        int result = 0;
+        
+        for (int i=0; i<n; i++) {
+            que.offer(Integer.parseInt(inputs[i]));
+        }
+
+        while (que.size() != 0) {
+            int patient = que.poll();
+            m--;
+
+            for (int x : que) {
+                if (patient < x) {
+                    que.offer(patient);
+                    patient = 0;
+                    if (m == -1) m = que.size()-1;
+                    break;
+                }
+            }
+            
+
+            if (patient != 0 && m == -1) {
+                result++;
+                break;
+            } else if (patient != 0) {
+                result++;
+            }
+        }
+
+        System.out.println(result);
+    }
+}
